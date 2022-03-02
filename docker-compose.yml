@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  web:
+    build: ./web
+    environment:
+      PORT: 80
+      API_HOST: http://api:8080
+    ports:
+      - "80:80"
+
+  api:
+    build: ./api
+    environment:
+      DB: "postgres://db_user:strongpassword@db/node-api-db"
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: node-api-db
+      POSTGRES_USER: db_user
+      POSTGRES_PASSWORD: strongpassword
+    ports:
+      - "5432:5432"
